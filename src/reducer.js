@@ -3,12 +3,12 @@ export const initialState = {
     playlists: [],
     playing: false,
     item: null,
-    token: '',
+    // token: 'BQB6GkIXJtfQ9g_3VeFDlT_JFIAE56wZ1NHMO3b3qm163kCn2ilMJNrq-maybH6t744qEQL0pcc2_3GSu4rjfjeWd8XMVZykPDp13LB8ck1Zh_sRjjVb7XmUrZZUfzQ_v74rNC_UlNNTNOpt',
 };
 
 // Its job just sit there and listen for an action
 const reducer = (state, action) => {
-    console.log('ACTION: 👉', action);
+    // console.log('ACTION: 👉', action);
     
     // Action -> type, [payload]
     switch (action.type) {
@@ -21,6 +21,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 token: action.token,
+            };
+        case 'SET_PLAYLISTS':
+            return {
+                ...state,
+                playlists: action.playlists,
             };
         default:
             return state;

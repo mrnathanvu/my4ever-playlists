@@ -28,6 +28,7 @@ function App() {
       })
 
       spotify.setAccessToken(_token);
+      
       spotify.getMe().then((user) => {
         // console.log('USER: 👉', user);
         dispatch({
@@ -35,8 +36,14 @@ function App() {
           user: user
         });
       });
-    }
 
+      spotify.getUserPlaylists().then((playlists) => {
+        dispatch({
+          type: 'SET_PLAYLISTS',
+          playlists: playlists
+        })
+      })
+    }
     // console.log('TOKEN: 👉', _token);
   }, []);
 
