@@ -11,18 +11,20 @@ import SongRow from './SongRow';
 
 function Body({ spotify }) {
 
-    const [{ discover_weekly }] = useDataLayerValue();
+    const [{ playlists }] = useDataLayerValue();
+
+    console.log('BODY playlists: 👉', playlists)
 
     return (
         <div className="body">
             <Header spotify={spotify}/>
 
             <div className="body__info">
-                <img src={discover_weekly?.images[0].url} atl=''/>
+                <img src={playlists?.images[0].url} atl=''/>
                 <div className="body__infoText">
                     <strong>PLAYLISTS</strong>
-                    <h2>Discover Weekly</h2>
-                    <p>{discover_weekly?.description}</p>
+                    <h2>{playlists?.name}</h2>
+                    <p>{playlists?.owner.display_name} • <span>{playlists?.tracks.items.length} songs</span></p>
                 </div>
             </div>
 
@@ -32,8 +34,8 @@ function Body({ spotify }) {
                     <FavoriteIcon fontSize='large'/>
                     <MoreHorizIcon />
                 </div>
-                {discover_weekly?.tracks.items.map(item => (
-                    <SongRow track={item.track} />
+                {playlists?.tracks.items.map((item, _i) => (
+                    <SongRow track={item.track} index={_i}/>
                 ))}
             </div>
         </div>

@@ -11,7 +11,7 @@ const spotify = new SpotifyWebApi();
 
 function App() {
 
-  const [{ user, token }, dispatch] = useDataLayerValue();
+  const [{ token }, dispatch] = useDataLayerValue();
 
   // Run code based on a given condition
   useEffect(() => {
@@ -21,7 +21,6 @@ function App() {
     // console.log('TOKEN: 👉', _token);
 
     if (_token) {
-
       dispatch({
         type: 'SET_TOKEN',
         token: _token
@@ -30,33 +29,36 @@ function App() {
       spotify.setAccessToken(_token);
 
       spotify.getMe().then((user) => {
-        // console.log('USER: 👉', user);
+        console.log('APP getMe: 👉', user);
         dispatch({
           type: 'SET_USER',
           user: user
         });
       });
 
-      spotify.getUserPlaylists().then((playlists) => {
-        dispatch({
-          type: 'SET_PLAYLISTS',
-          playlists: playlists
-        })
-      });
+      spotify.getUserPlaylists()
+        .then((userPlaylist) => {
+          console.log('APP getUserPlaylists: 👉', userPlaylist.items);
+          dispatch({
+            type: 'SET_USER_PLAYLISTS',
+            userPlaylists: userPlaylist.items
+          })
 
-      spotify.getPlaylist('37i9dQZEVXcGkMzYXPORRj').then(response => 
-        dispatch({
-          type: 'SET_DISCOVER_WEEKLY',
-          discover_weekly: response,
-        })
-      );
+          spotify.getPlaylist(userPlaylist.items[0].id)
+            .then((playlist) => {
+              console.log('App getPlaylist: 👉', playlist);
+              dispatch({
+                type: 'SET_PLAYLISTS',
+                playlists: playlist,
+              });
+            });
+
+        });
+
+  
 
     }
-    // console.log('TOKEN: 👉', _token);
   }, []);
-
-  // console.log('USER: 👉👉', user);
-  // console.log('TOKEN: 👉👉', token);
 
   return (
     // BEM
