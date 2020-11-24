@@ -11,7 +11,9 @@ const spotify = new SpotifyWebApi();
 
 function App() {
 
-  const [{ token }, dispatch] = useDataLayerValue();
+  const [{ token, playlistID }, dispatch] = useDataLayerValue();
+
+  // console.log('APP PLAYLIST ID: 👉', playlistID)
 
   // Run code based on a given condition
   useEffect(() => {
@@ -28,13 +30,14 @@ function App() {
 
       spotify.setAccessToken(_token);
 
-      spotify.getMe().then((user) => {
-        console.log('APP getMe: 👉', user);
-        dispatch({
-          type: 'SET_USER',
-          user: user
+      spotify.getMe()
+        .then((me) => {
+          console.log('APP getMe: 👉', me);
+          dispatch({
+            type: 'SET_USER',
+            user: me
+          });
         });
-      });
 
       spotify.getUserPlaylists()
         .then((userPlaylist) => {
@@ -43,29 +46,48 @@ function App() {
             type: 'SET_USER_PLAYLISTS',
             userPlaylists: userPlaylist.items
           })
-
-          spotify.getPlaylist(userPlaylist.items[0].id)
-            .then((playlist) => {
-              console.log('App getPlaylist: 👉', playlist);
-              dispatch({
-                type: 'SET_PLAYLISTS',
-                playlists: playlist,
-              });
-            });
-
+          
+          console.log('APP getUserPlaylists_id: 👉', userPlaylist.items[0].id);
+          dispatch({
+            type: 'SET_PLAYLIST_ID',
+            playlistID: userPlaylist.items[0].id
+          })
         });
+
+      // spotify.getPlaylist(playlistID)
+      //   .then((playlist) => {
+      //     console.log('App getPlaylist: 👉', playlist);
+      //     dispatch({
+      //       type: 'SET_PLAYLISTS',
+      //       playlists: playlist,
+      //     });
+      //   });
+
 
   
 
     }
   }, []);
 
+  useEffect(() => {
+
+    spotify.getPlaylist(playlistID)
+        .then((playlist) => {
+          console.log('App getPlaylist: 👉', playlist);
+          dispatch({
+            type: 'SET_PLAYLISTS',
+            playlists: playlist,
+          });
+        });
+
+  },[playlistID])
+
   return (
     // BEM
     <div className="app">
       {
         token ? (
-          <Player spotify={spotify}/>
+          <Player />
         ) : (
           <Login />
         )

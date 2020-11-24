@@ -12,7 +12,7 @@ function Sidebar() {
 
     const [{ userPlaylists }] = useDataLayerValue();
 
-    console.log('SIDEBAR userPlaylist: 👉', userPlaylists)
+    // console.log('SIDEBAR userPlaylist: 👉', userPlaylists)
 
     return (
         <div className="sidebar">
@@ -29,8 +29,8 @@ function Sidebar() {
             <strong className='sidebar_title'>PLAYLISTS</strong>
             <hr/>
 
-            {userPlaylists?.map((userPlaylist, _i) => (
-                <SidebarOption title={userPlaylist.name} index={_i}/>
+            {userPlaylists?.map((data) => (
+                <SidebarOption data={data} />
             ))}
         </div>
     );

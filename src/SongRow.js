@@ -1,15 +1,27 @@
 import React from 'react';
 
 import './SongRow.css';
+import { useDataLayerValue } from './DataLayer';
 
-function SongRow({ track }) {
+function SongRow({ data }) {
+
+    const [ state , dispatch] = useDataLayerValue();
+
+    const songSelector = (id) => {
+        console.log('SIDEBAR SONG_PREVIEW_URL: 👉', id)
+        dispatch({
+            type: 'SET_SONG_PREVIEW_URL',
+            songPreviewUrl: id
+        })
+    }
+
     return (
-        <div className='songRow'>
-            <img className='songRow__album' src={track.album.images[0].url} alt=''/>
+        <div className='songRow' onClick={() => {songSelector(data.preview_url)}}>
+            <img className='songRow__album' src={data.album.images[0].url} alt=''/>
             <div className="songRow__info">
-                <h1>{track.name}</h1>
+                <h1>{data.name}</h1>
                 <p>
-                    {track.artists.map((artist) => artist.name).join(', ')} -{' '}{track.album.name}
+                    {data.artists.map((item) => item.name).join(', ')} -{' '}{data.album.name}
                 </p>
             </div>            
         </div>

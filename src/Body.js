@@ -9,7 +9,7 @@ import Header from './Header';
 import { useDataLayerValue } from './DataLayer';
 import SongRow from './SongRow';
 
-function Body({ spotify }) {
+function Body() {
 
     const [{ playlists }] = useDataLayerValue();
 
@@ -17,7 +17,7 @@ function Body({ spotify }) {
 
     return (
         <div className="body">
-            <Header spotify={spotify}/>
+            <Header />
 
             <div className="body__info">
                 <img src={playlists?.images[0].url} atl=''/>
@@ -34,8 +34,8 @@ function Body({ spotify }) {
                     <FavoriteIcon fontSize='large'/>
                     <MoreHorizIcon />
                 </div>
-                {playlists?.tracks.items.map((item, _i) => (
-                    <SongRow track={item.track} index={_i}/>
+                {playlists?.tracks.items.map((data) => (
+                    <SongRow data={data.track} />
                 ))}
             </div>
         </div>

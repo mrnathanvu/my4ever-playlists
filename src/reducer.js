@@ -3,6 +3,8 @@ export const initialState = {
     user: null,
     userPlaylists: null,
     playlists: null,
+    playlistID: null,
+    songPreviewUrl: null,
     // playlists: [],
     // playing: false,
     // item: null,
@@ -34,11 +36,16 @@ const reducer = (state, action) => {
                 ...state,
                 playlists: action.playlists,
             };
-        // case 'SET_DISCOVER_WEEKLY':
-        //     return {
-        //         ...state,
-        //         discover_weekly: action.discover_weekly,
-        //     }
+        case 'SET_PLAYLIST_ID':
+            return {
+                ...state,
+                playlistID: action.playlistID,
+            };
+        case 'SET_SONG_PREVIEW_URL':
+            return {
+                ...state,
+                songPreviewUrl: action.songPreviewUrl,
+            };
         default:
             return state;
     }
