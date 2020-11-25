@@ -5,9 +5,9 @@ export const initialState = {
     playlists: null,
     playlistID: null,
     songPreviewUrl: null,
-    // playlists: [],
-    // playing: false,
-    // item: null,
+    playing: false,
+    songIndex: null,
+    arrOfSongs: [],
 };
 
 // Its job just sit there and listen for an action
@@ -45,6 +45,21 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 songPreviewUrl: action.songPreviewUrl,
+            };
+        case 'SET_PLAYING':
+            return {
+                ...state,
+                playing: action.playing,
+            };
+        case 'SET_ARRAY_OF_SONG':
+            return {
+                ...state,
+                arrOfSongs: action.arrOfSongs,
+            };
+        case 'SET_SONG_INDEX':
+            return {
+                ...state,
+                songIndex: action.songIndex,
             };
         default:
             return state;

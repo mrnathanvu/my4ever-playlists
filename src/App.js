@@ -78,6 +78,12 @@ function App() {
             type: 'SET_PLAYLISTS',
             playlists: playlist,
           });
+
+          console.log('App getPlaylist_array: 👉', playlist.tracks.items);
+          dispatch({
+            type: "SET_ARRAY_OF_SONG",
+            arrOfSongs: playlist.tracks.items
+          })
         });
 
   },[playlistID])
