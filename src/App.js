@@ -13,8 +13,6 @@ function App() {
 
   const [{ token, playlistID }, dispatch] = useDataLayerValue();
 
-  // console.log('APP PLAYLIST ID: 👉', playlistID)
-
   // Run code based on a given condition
   useEffect(() => {
     const hash = getTokenFromUrl();
@@ -32,7 +30,7 @@ function App() {
 
       spotify.getMe()
         .then((me) => {
-          console.log('APP getMe: 👉', me);
+          // console.log('APP getMe: 👉', me);
           dispatch({
             type: 'SET_USER',
             user: me
@@ -41,31 +39,18 @@ function App() {
 
       spotify.getUserPlaylists()
         .then((userPlaylist) => {
-          console.log('APP getUserPlaylists: 👉', userPlaylist.items);
+          // console.log('APP getUserPlaylists: 👉', userPlaylist.items);
           dispatch({
             type: 'SET_USER_PLAYLISTS',
             userPlaylists: userPlaylist.items
           })
           
-          console.log('APP getUserPlaylists_id: 👉', userPlaylist.items[0].id);
+          // console.log('APP getUserPlaylists_id: 👉', userPlaylist.items[0].id);
           dispatch({
             type: 'SET_PLAYLIST_ID',
             playlistID: userPlaylist.items[0].id
           })
         });
-
-      // spotify.getPlaylist(playlistID)
-      //   .then((playlist) => {
-      //     console.log('App getPlaylist: 👉', playlist);
-      //     dispatch({
-      //       type: 'SET_PLAYLISTS',
-      //       playlists: playlist,
-      //     });
-      //   });
-
-
-  
-
     }
   }, []);
 
@@ -73,15 +58,15 @@ function App() {
 
     spotify.getPlaylist(playlistID)
         .then((playlist) => {
-          console.log('App getPlaylist: 👉', playlist);
+          // console.log('App getPlaylist: 👉', playlist);
           dispatch({
             type: 'SET_PLAYLISTS',
             playlists: playlist,
           });
 
-          console.log('App getPlaylist_array: 👉', playlist.tracks.items);
+          // console.log('App getPlaylist_array: 👉', playlist.tracks.items);
           dispatch({
-            type: "SET_ARRAY_OF_SONG",
+            type: "SET_ARRAY_OF_SONGS",
             arrOfSongs: playlist.tracks.items
           })
         });

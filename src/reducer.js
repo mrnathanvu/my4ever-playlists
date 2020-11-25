@@ -6,8 +6,11 @@ export const initialState = {
     playlistID: null,
     songPreviewUrl: null,
     playing: false,
-    songIndex: null,
     arrOfSongs: [],
+    songIndex: null,
+    shuffle: false,
+    volume: 0.3,
+    trackInfo: null,
 };
 
 // Its job just sit there and listen for an action
@@ -51,7 +54,7 @@ const reducer = (state, action) => {
                 ...state,
                 playing: action.playing,
             };
-        case 'SET_ARRAY_OF_SONG':
+        case 'SET_ARRAY_OF_SONGS':
             return {
                 ...state,
                 arrOfSongs: action.arrOfSongs,
@@ -60,6 +63,21 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 songIndex: action.songIndex,
+            };
+        case 'SET_SHUFFLE':
+            return {
+                ...state,
+                shuffle: action.shuffle,
+            };
+        case 'SET_VOLUME':
+            return {
+                ...state,
+                volume: action.volume,
+            };
+        case 'SET_TRACK_FULL_INFO':
+            return {
+                ...state,
+                trackInfo: action.trackInfo,
             };
         default:
             return state;

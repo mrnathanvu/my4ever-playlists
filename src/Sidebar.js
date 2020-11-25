@@ -12,8 +12,6 @@ function Sidebar() {
 
     const [{ userPlaylists }] = useDataLayerValue();
 
-    // console.log('SIDEBAR userPlaylist: 👉', userPlaylists)
-
     return (
         <div className="sidebar">
             <img 

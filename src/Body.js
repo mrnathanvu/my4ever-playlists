@@ -12,23 +12,19 @@ import SongRow from './SongRow';
 
 function Body() {
 
-    const [{ playlists, songPreviewUrl, playing, songIndex, arrOfSongs }, dispatch] = useDataLayerValue();
-
-    console.log('BODY songPreviewUrl 👉', songPreviewUrl);
-    console.log('BODY playlists: 👉', playlists)
+    const [{ playlists, songPreviewUrl, playing, arrOfSongs, songIndex, shuffle, volume }, dispatch] = useDataLayerValue();
 
     const audio = useRef();
 
+
     useEffect(() => {
-        // console.log('BODY currentSong 👉', songPreviewUrl);
+        
         playing ? audio.current.play() : audio.current.pause();
+        
+        audio.current.volume = volume;
 
-        // console.log('BODY before volume 👉', audio.current.volume);
-        // audio.current.volume = volume;
-        // console.log('BODY after volume 👉', audio.current.volume);
+    }, [playing, songPreviewUrl, volume])
 
-    // }, [playing, songPreviewUrl, volume])
-    }, [playing, songPreviewUrl])
 
     const handlePlayPause = () => {
         if (playing) {
@@ -44,20 +40,47 @@ function Body() {
         }
     };
 
-    const handleEnded = () => {
-        if (songIndex === arrOfSongs.length - 1) {
-          return;
+
+    const generateRandomNumber = () => {
+        var randomNumber = Math.floor(Math.random() * arrOfSongs.length);
+
+        if (songIndex === randomNumber) {
+            return generateRandomNumber();
         } else {
-          dispatch({
-            type: "SET_SONG_PREVIEW_URL",
-            songPreviewUrl: arrOfSongs[songIndex + 1].track.preview_url
-          });
-      
-          dispatch({
-            type: "SET_SONG_INDEX",
-            songIndex: songIndex + 1
-      
-          });
+            return randomNumber;
+        }
+    }
+
+    const handleEnded = () => {
+        if (shuffle) {
+            var randomIndex = generateRandomNumber();
+
+            dispatch({
+                type: "SET_SONG_PREVIEW_URL",
+                songPreviewUrl: arrOfSongs[randomIndex].track.preview_url
+            });
+
+            dispatch({
+                type: "SET_SONG_INDEX",
+                songIndex: randomIndex
+            });
+        } else {
+            if (songIndex === arrOfSongs.length - 1) {
+                dispatch({
+                    type: "SET_PLAYING",
+                    playing: false
+                });
+            } else {
+                dispatch({
+                    type: "SET_SONG_PREVIEW_URL",
+                    songPreviewUrl: arrOfSongs[songIndex + 1].track.preview_url
+                });
+                
+                dispatch({
+                    type: "SET_SONG_INDEX",
+                    songIndex: songIndex + 1
+                });
+            }
         }
     }
 
@@ -87,8 +110,8 @@ function Body() {
                         onClick={handlePlayPause}
                     />
                 )}
-                    <FavoriteIcon fontSize='large'/>
-                    <MoreHorizIcon />
+                <FavoriteIcon fontSize='large'/>
+                <MoreHorizIcon />
                 </div>
                 {playlists?.tracks.items.map((data, _i) => (
                     <SongRow data={data.track} index={_i} />
@@ -101,7 +124,6 @@ function Body() {
                 preload='true'
                 onEnded={handleEnded}
             />
-
         </div>
     );
 }

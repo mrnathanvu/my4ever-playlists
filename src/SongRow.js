@@ -7,11 +7,10 @@ function SongRow({ data, index }) {
 
     const [ state , dispatch] = useDataLayerValue();
 
-    const handlePlay = (previewUrl, index) => {
-        console.log('SIDEBAR SONG_PREVIEW_URL: 👉', previewUrl)
+    const handlePlay = (track, index) => {
         dispatch({
             type: 'SET_SONG_PREVIEW_URL',
-            songPreviewUrl: previewUrl
+            songPreviewUrl: track.preview_url
         })
 
         dispatch({
@@ -19,15 +18,19 @@ function SongRow({ data, index }) {
             playing: true,
         });
 
-        console.log('SIDEBAR SONG_INDEX: 👉', index)
         dispatch({
             type: "SET_SONG_INDEX",
             songIndex: index
         });
+
+        dispatch({
+            type: "SET_TRACK_FULL_INFO",
+            trackInfo: track
+        });
     }
 
     return (
-        <div className='songRow' onClick={() => {handlePlay(data.preview_url, index)}}>
+        <div className='songRow' onClick={() => {handlePlay(data, index)}}>
             <img className='songRow__album' src={data.album.images[0].url} alt=''/>
             <div className="songRow__info">
                 <h1>{data.name}</h1>
