@@ -8,25 +8,30 @@ function SongRow({ data, index }) {
     const [ state , dispatch] = useDataLayerValue();
 
     const handlePlay = (track, index) => {
-        dispatch({
-            type: 'SET_SONG_PREVIEW_URL',
-            songPreviewUrl: track.preview_url
-        })
-
-        dispatch({
-            type: "SET_PLAYING",
-            playing: true,
-        });
-
-        dispatch({
-            type: "SET_SONG_INDEX",
-            songIndex: index
-        });
-
-        dispatch({
-            type: "SET_TRACK_FULL_INFO",
-            trackInfo: track
-        });
+        if (track.preview_url) {
+            dispatch({
+                type: 'SET_SONG_PREVIEW_URL',
+                songPreviewUrl: track.preview_url
+            })
+    
+            dispatch({
+                type: "SET_PLAYING",
+                playing: true,
+            });
+    
+            dispatch({
+                type: "SET_SONG_INDEX",
+                songIndex: index
+            });
+    
+            dispatch({
+                type: "SET_TRACK_FULL_INFO",
+                trackInfo: track
+            });
+        } else {
+            alert("NO SONG PREVIEW PROVIDED.\nPLEASE CHOOSE ANOTHER SONG.\nTHANK YOU! ♥️");
+        }
+        
     }
 
     return (
