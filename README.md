@@ -1,3 +1,27 @@
+# My4Ever Playlists
+
+> https://spotify-clone-360ff.web.app/
+
+• A demo streaming music web app that includes user authentication and makes API calls for user name, photos, playlists, and track data.
+• A complex user interface with volume controls, playback buttons, and the ability to preview selected audio tracks.
+
+## Preview
+
+![App Demo](./public/Spotify_Clone_Demo_01.GIF)
+![App Demo](./public/Spotify_Clone_Demo_02.GIF)
+![App Demo](./public/Spotify_Clone_Demo_03.GIF)
+
+## Build With
+
+- [Javascript]()
+- [Create React App](https://create-react-app.dev/)
+- [React.js(Context API, Hooks)](https://reactjs.org/)
+- [Spotify Web API ](https://developer.spotify.com/documentation/web-api/)
+- [Firebase](https://firebase.google.com/)
+- [Material-UI](https://material-ui.com/)
+
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +92,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
