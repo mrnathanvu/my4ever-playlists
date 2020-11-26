@@ -2,8 +2,8 @@
 
 > https://spotify-clone-360ff.web.app/
 
-• A demo streaming music web app that includes user authentication and makes API calls for user name, photos, playlists, and track data.
-• A complex user interface with volume controls, playback buttons, and the ability to preview selected audio tracks.
+- A demo streaming music web app that includes user authentication and makes API calls for user name, photos, playlists, and track data.
+- A complex user interface with volume controls, playback buttons, and the ability to preview selected audio tracks.
 
 ## Preview
 
