@@ -64,6 +64,11 @@ function Body() {
                 type: "SET_SONG_INDEX",
                 songIndex: randomIndex
             });
+
+            dispatch({
+                type: "SET_TRACK_FULL_INFO",
+                trackInfo: arrOfSongs[randomIndex].track
+            });
         } else {
             if (songIndex === arrOfSongs.length - 1) {
                 dispatch({
@@ -79,6 +84,11 @@ function Body() {
                 dispatch({
                     type: "SET_SONG_INDEX",
                     songIndex: songIndex + 1
+                });
+
+                dispatch({
+                    type: "SET_TRACK_FULL_INFO",
+                    trackInfo: arrOfSongs[songIndex + 1].track
                 });
             }
         }
