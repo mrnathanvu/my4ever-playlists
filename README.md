@@ -2,8 +2,11 @@
 
 > https://spotify-clone-360ff.web.app/
 
-- A demo streaming music web app that includes user authentication and makes API calls for user name, photos, playlists, and track data.
-- A complex user interface with volume controls, playback buttons, and the ability to preview selected audio tracks.
+- An e-commerce store that delivers a custom shopping experience with the ability to accept secure online payments in Stripe with real-time dashboard monitoring.
+
+- Designed a single-page web application with React Router to preserve the site navigation with dynamic, client-side routing, allowing the user to navigate without the page refreshing.
+
+- Added account signup with email or phone number using Firebase Authentication, permitting order and user tracking by UID in Cloud FireStore to manage an effective business.
 
 ## Preview
 
@@ -14,11 +17,11 @@
 ## Build With
 
 - [Javascript]()
-- [Create React App](https://create-react-app.dev/)
-- [React.js(Context API, Hooks)](https://reactjs.org/)
+- [React.js](https://reactjs.org/)
 - [Spotify Web API ](https://developer.spotify.com/documentation/web-api/)
-- [Firebase](https://firebase.google.com/)
 - [Material-UI](https://material-ui.com/)
+- [Firebase](https://firebase.google.com/)
+- [Create React App](https://create-react-app.dev/)
 
 ```
 
